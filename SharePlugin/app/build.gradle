@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.happy.shareplugin"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 2
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+apply plugin: 'replugin-plugin-gradle'
+repluginPluginConfig {
+    pluginName = "share"
+    hostApplicationId = "com.tencent.sample"
+    hostAppLauncherActivity = "com.tencent.sample.MainActivity"
+}
+
+
+
+
+dependencies {
+    // 只参与编译
+    provided files('libs/share_lib.jar')
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    // replugin
+    compile 'com.qihoo360.replugin:replugin-plugin-lib:2.2.1'
+    // 第三方分享
+    // sinaWeibo
+    compile 'com.sina.weibo.sdk:core:4.1.4:openDefaultRelease@aar'
+    compile files('libs/wechat-sdk-android-with-mta-1.3.5.jar')
+    compile files('libs/open_sdk_r5923_lite.jar')
+}
